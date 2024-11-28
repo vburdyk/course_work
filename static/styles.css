@@ -1,0 +1,195 @@
+/* Загальний стиль для сторінки */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* Шапка */
+header {
+    background-color: #007bff; /* Синій фон */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3em; /* Збільшено розмір шрифту */
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase; /* Великі літери */
+    letter-spacing: 2px; /* Розсування літер для додання стилю */
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    padding: 5px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Тінь для тексту */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Стилі для посилання в заголовку */
+header h1 a {
+    text-decoration: none; /* Відключити підкреслення */
+    color: inherit; /* Спадкує колір від батьківського елемента */
+}
+
+header h1 a:hover {
+    color: inherit; /* Забезпечує, щоб при наведенні кольори не змінювались */
+}
+
+/* Анімація при наведенні на заголовок */
+header h1:hover {
+    color: #ffdd57; /* Зміна кольору на жовтий при наведенні */
+    transform: scale(1.1); /* Збільшення тексту */
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Збільшення тіні */
+}
+
+/* Підкреслення нижче заголовка при наведенні */
+header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffdd57; /* Жовта лінія під текстом */
+    transition: width 0.3s ease;
+}
+
+header h1:hover::after {
+    width: 100%; /* Лінія заповнює весь простір при наведенні */
+}
+
+/* Навігаційна панель */
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffdd57; /* Зміна кольору на жовтий при наведенні */
+}
+
+/* Основний контент */
+main {
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+/* Заголовки */
+h2, h3 {
+    color: #333;
+}
+
+/* Списки */
+ul.list {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.list li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    border-radius: 5px;
+    padding: 10px; /* Додали відступи для елементів списку */
+}
+
+/* Поля вводу */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: vertical; /* Для textarea */
+    box-sizing: border-box; /* Забезпечує коректний розрахунок ширини */
+}
+
+/* Кнопки */
+button {
+    background-color: #007bff; /* Синій фон */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%; /* Кнопка займає всю ширину контейнера */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3; /* Темніший синій при наведенні */
+    transform: scale(1.05); /* Легке збільшення кнопки при наведенні */
+}
+
+/* Повідомлення про помилки */
+.messages {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.messages .error {
+    background-color: #ffe6e6; /* Світло-червоний фон */
+    color: #e74c3c; /* Червоний текст */
+    border: 1px solid #e74c3c;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Футер */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Сторінка входу */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left; /* Вирівнюємо текст лейбла */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}

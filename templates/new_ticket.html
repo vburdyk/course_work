@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="ticket-form-section">
+    <h2>Створити новий запит у підтримку</h2>
+    <form method="post" action="{% url 'new_ticket' %}" id="ticket-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="issue">Опишіть свій запит:</label>
+            <textarea id="issue" name="issue" rows="4" required></textarea>
+        </div>
+        
+        <button type="submit" class="btn-submit">Створити запит</button>
+    </form>
+</section>
+
+<style>
+    .ticket-form-section {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .ticket-form-section h2 {
+        text-align: center;
+        font-size: 1.8em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-size: 1em;
+        color: #333;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-group textarea:focus {
+        border-color: #007bff;
+    }
+
+    .btn-submit {
+        padding: 10px 20px;
+        font-size: 1.1em;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: block;
+        width: 100%;
+    }
+
+    .btn-submit:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-submit:active {
+        background-color: #004085;
+    }
+</style>
+
+{% endblock %}

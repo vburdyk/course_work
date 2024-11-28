@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="login-container">
+        <h2>Вхід</h2>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p class="error">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Логін:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Увійти</button>
+        </form>
+        <p style="text-align: center; margin-top: 15px;">
+            Немає облікового запису?
+            <a href="{% url 'register' %}" style="text-decoration: none; color: #007bff;">Зареєструватись</a>
+        </p>
+    </div>
+{% endblock %}

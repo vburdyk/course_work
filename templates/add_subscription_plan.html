@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Додати нову підписку</h2>
+
+        <form method="POST" class="subscription-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="plan_name">Назва підписки:</label>
+                <input type="text" id="plan_name" name="plan_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="plan_description">Опис:</label>
+                <input type="text" id="plan_description" name="plan_description" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Вартість (₴):</label>
+                <input type="number" step="0.01" id="price" name="price" required>
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Тривалість (місяців):</label>
+                <input type="number" id="duration" name="duration" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Додати підписку</button>
+        </form>
+    </div>
+
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .subscription-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 1em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #007bff;
+        }
+
+        .btn-submit {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-submit:active {
+            background-color: #004085;
+        }
+    </style>
+
+{% endblock %}

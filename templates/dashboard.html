@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <section>
+        <h2>Вітання, {{ request.user.username }}!</h2>
+        <div>
+            <h3>На вашому балансі: {{ user_balance.balance }} грн</h3>
+        </div>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <div class="section">
+            <h3>Підписки, які пропонує провайдер:</h3>
+            <ul class="list">
+                {% for subscription_plan in subscriptions_plans %}
+                    <li class="subscription-item">
+                        <strong>{{ subscription_plan.name }}</strong><br>
+                        <strong>Опис:</strong> {{ subscription_plan.description }}<br>
+                        <strong>Тривалість:</strong> {{ subscription_plan.duration_months }} місяців<br>
+                        <strong>Вартість:</strong> {{ subscription_plan.price }} грн<br>
+                        {% if subscription_plan.id == active_subscription_plan_id %}
+                            <p><strong>У вас вже є ця підписка</strong></p>
+                        {% elif user.is_staff %}
+                            
+                        {% else %}
+                            <form action="{% url 'subscribe' plan_id=subscription_plan.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-subscribe">Підписатися</button>
+                            </form>
+                        {% endif %}
+                    </li>
+                {% empty %}
+                    <li>Підписки не знайдено.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Мої підписки</h3>
+            <ul class="list">
+                {% for subscription in subscriptions %}
+                    <li>
+                        <strong>{{ subscription.plan.name }}</strong>
+                        <strong>Статус:</strong>
+                        {% if subscription.status == 'Active' %}
+                            Активовано
+                        {% elif subscription.status == 'Inactive' %}
+                            Неактивовано
+                        {% elif subscription.status == 'Cancelled' %}
+                            Скасовано
+                        {% else %}
+                            Невідомий статус
+                        {% endif %}
+                        <br>
+                        Від: {{ subscription.start_date }} До: {{ subscription.end_date }}
+                    </li>
+                {% empty %}
+                    <li>Підписки не знайдено.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Мої рахунки</h3>
+            <ul class="list">
+                {% for invoice in invoices %}
+                    <li>
+                        <strong>Вартість:</strong> {{ invoice.amount }}<br>
+                        <strong>Дата:</strong> {{ invoice.date_created }}<br>
+                        <strong>Статус:</strong> {{ invoice.paid|yesno:"Оплачено,Неоплачено" }}
+                    </li>
+                {% empty %}
+                    <li>Рахунків не знайдено.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Мої запити у підтримку</h3>
+            <ul class="list">
+                {% for ticket in tickets %}
+                    <li>
+                        <strong>Запит:</strong> {{ ticket.issue }}<br>
+                        <strong>Статус:</strong>
+                        {% if ticket.status == 'Open' %}
+                            Створено
+                        {% elif ticket.status == 'In Progress' %}
+                            Опрацьовується
+                        {% elif ticket.status == 'Resolved' %}
+                            Вирішено
+                        {% else %}
+                            Невідомий статус
+                        {% endif %}
+                        <br><strong>Створено:</strong> {{ ticket.date_created }}
+                    </li>
+                {% empty %}
+                    <li>Запитів не знайдено.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+
+    <style>
+        /* Клас для кнопки підписки */
+        .btn-subscribe {
+            display: inline-block; /* Робимо кнопку лише за розміром тексту */
+            padding: 8px 20px; /* Внутрішній відступ */
+            font-size: 14px; /* Зменшений розмір тексту */
+            font-weight: bold; /* Жирний текст */
+            color: #fff; /* Білий текст */
+            background-color: #007bff; /* Синій фон */
+            border: none; /* Без рамки */
+            border-radius: 5px; /* Закруглені кути */
+            cursor: pointer; /* Курсор при наведенні */
+            transition: background-color 0.3s ease; /* Анімація при наведенні */
+        }
+
+        /* Додатковий стиль для кнопки при наведенні */
+        .btn-subscribe:hover {
+            background-color: #0056b3; /* Темніший синій */
+        }
+
+        /* Центрування тексту у списку */
+        .subscription-item {
+            padding: 10px; /* Відступи навколо */
+            margin: 10px 0; /* Відступ між підписками */
+            border: 1px solid #ddd; /* Легка рамка */
+            border-radius: 5px; /* Закруглені кути */
+            background-color: #f9f9f9; /* Світло-сірий фон */
+            text-align: left; /* Текст по лівому краю */
+        }
+
+        /* Задаємо обмежену ширину форми */
+        .subscription-item form {
+            display: inline-block; /* Робимо форму лише за розміром кнопки */
+        }
+    </style>
+{% endblock %}

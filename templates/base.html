@@ -1,0 +1,39 @@
+{% load static %}
+<!-- main_app/templates/main_app/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ультранет</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+<header>
+    <h1><a href="{% url 'dashboard' %}">Ультранет</a></h1>
+
+    {% if user.is_authenticated %}
+        <nav>
+            <a href="{% url 'dashboard' %}">Інформаційна панель</a>
+            {% if not user.is_staff %}
+                <a href="{% url 'new_ticket' %}">Запит у підтримку</a>
+            {% else %}
+                <a href="{% url 'add_subscription_plan' %}">Додати нову підписку</a>
+                <a href="{% url 'manage_tickets' %}">Переглянути запити у підтримку</a>
+            {% endif %}
+            <a href="{% url 'logout' %}">Вийти</a>
+        </nav>
+    {% endif %}
+
+
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+{#    <footer>#}
+{#        <p>&copy; 2024 ISP System</p>#}
+{#    </footer>#}
+</body>
+</html>
